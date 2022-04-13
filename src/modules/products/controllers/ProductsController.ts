@@ -19,7 +19,7 @@ export default class ProductsController {
 
     const showProduct = new ShowProductService();
 
-    const product = showProduct.execute({ id });
+    const product = await showProduct.execute({ id });
 
     return response.json(product);
   }
@@ -61,6 +61,6 @@ export default class ProductsController {
 
     await deleteProduct.execute({ id });
 
-    return response.status(204).send();
+    return response.status(200).send();
   }
 }
