@@ -6,6 +6,8 @@ temp/
 .env
 coverage
 dist
+gittoken.txt
+
 
 uploads/*
 !uploads/.gitkeep
