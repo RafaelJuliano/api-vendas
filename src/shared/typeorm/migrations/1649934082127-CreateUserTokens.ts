@@ -23,6 +23,16 @@ export class CreateUserTokens1649934082127 implements MigrationInterface {
             name: 'user_id',
             type: 'uuid',
           },
+          {
+            name: 'created_at',
+            type: 'timestamp with time zone',
+            default: 'now()',
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp with time zone',
+            default: 'now()',
+          },
         ],
         foreignKeys: [
           {
