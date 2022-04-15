@@ -1,4 +1,5 @@
 import AppError from '@shared/errors/AppError';
+import { classToClass } from 'class-transformer';
 import { Request, Response } from 'express';
 import UpdateUserAvatarService from '../services/UpdateUserAvatarService';
 
@@ -10,11 +11,15 @@ export default class UserAvatarController {
       throw new AppError('Please provide an avatar image.', 400);
     }
 
-    const user = updateAvatar.execute({
+    if (request.file.filename.includes(' ')) {
+      throw new AppError('Invalid file name.', 400);
+    }
+
+    const user = await updateAvatar.execute({
       user_id: request.user.id,
       avatarFilename: request.file.filename,
     });
 
-    return response.json(user);
+    return response.json(classToClass(user));
   }
 }
