@@ -1,3 +1,4 @@
+import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
 import User from '../typeorm/entities/User';
 import UsersRepository from '../typeorm/repositories/UsersRepository';
@@ -13,7 +14,7 @@ class ShowProfileService {
     const user = await usersRepository.findById(user_id);
 
     if (!user) {
-      throw new Error('User not found');
+      throw new AppError('User not found');
     }
 
     return user;

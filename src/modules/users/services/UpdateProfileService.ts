@@ -1,3 +1,4 @@
+import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
 import User from '../typeorm/entities/User';
 import UsersRepository from '../typeorm/repositories/UsersRepository';
@@ -24,23 +25,23 @@ class UpdateProfileService {
     const user = await usersRepository.findById(user_id);
 
     if (!user) {
-      throw new Error('User not found');
+      throw new AppError('User not found');
     }
 
     const userUpdateEmail = await usersRepository.findByEmail(email);
     if (userUpdateEmail && userUpdateEmail.id !== user_id) {
-      throw new Error('Email already in use');
+      throw new AppError('Email already in use');
     }
 
     if (password && !old_password) {
-      throw new Error('Old password is required to set a new password');
+      throw new AppError('Old password is required to set a new password');
     }
 
     if (password && old_password) {
       const checkOldPassword = await compare(old_password, user.password);
 
       if (!checkOldPassword) {
-        throw new Error('Old password does not match');
+        throw new AppError('Old password does not match');
       }
 
       user.password = await hash(password, 8);
