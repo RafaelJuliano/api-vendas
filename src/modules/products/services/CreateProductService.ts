@@ -14,7 +14,7 @@ class CreateProductService {
   public async execute({ name, price, quantity }: IRequest): Promise<Product> {
     const productsRepository = getCustomRepository(ProductRepository);
     const productExists = await productsRepository.findByName(name);
-    const redisCache = new RedisCache();
+    //const redisCache = new RedisCache();
 
     if (productExists) {
       throw new AppError('Product already exists');
@@ -26,7 +26,7 @@ class CreateProductService {
       quantity,
     });
 
-    await redisCache.invalidate('api-vendas-PRODUCT_LIST');
+    await RedisCache.invalidate('api-vendas-PRODUCT_LIST');
 
     await productsRepository.save(product);
 

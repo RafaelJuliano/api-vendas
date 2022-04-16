@@ -11,10 +11,6 @@ export default class UserAvatarController {
       throw new AppError('Please provide an avatar image.', 400);
     }
 
-    if (request.file.filename.includes(' ')) {
-      throw new AppError('Invalid file name.', 400);
-    }
-
     const user = await updateAvatar.execute({
       user_id: request.user.id,
       avatarFilename: request.file.filename,
