@@ -12,3 +12,5 @@ ormconfig.json
 
 uploads/*
 !uploads/.gitkeep
+
+.docker/dbdata
