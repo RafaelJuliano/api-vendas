@@ -1,6 +1,6 @@
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import ProductRepository from '../typeorm/Repositories/ProductsRepository';
+import ProductRepository from '../infra/typeorm/Repositories/ProductsRepository';
 import RedisCache from '@shared/cache/RedisCache';
 
 interface IRequest {
