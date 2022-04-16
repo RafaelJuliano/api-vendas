@@ -1,13 +1,6 @@
-import {
-  MigrationInterface,
-  QueryRunner,
-  TableColumn,
-  TableForeignKey,
-} from 'typeorm';
+import { MigrationInterface, QueryRunner, TableColumn, TableForeignKey } from 'typeorm';
 
-export class AddProductIdToOrdersProducts1650032045601
-  implements MigrationInterface
-{
+export class AddProductIdToOrdersProducts1650032045601 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.addColumn(
       'orders_products',
@@ -31,10 +24,7 @@ export class AddProductIdToOrdersProducts1650032045601
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey(
-      'orders_products',
-      'OrdersProductsProduct',
-    );
+    await queryRunner.dropForeignKey('orders_products', 'OrdersProductsProduct');
 
     await queryRunner.dropColumn('orders_products', 'product_id');
   }

@@ -18,12 +18,10 @@ profileRouter.put(
       email: Joi.string().email().required(),
       old_password: Joi.string(),
       password: Joi.string().optional(),
-      password_confirmation: Joi.string()
-        .valid(Joi.ref('password'))
-        .when('password', {
-          is: Joi.exist(),
-          then: Joi.required(),
-        }),
+      password_confirmation: Joi.string().valid(Joi.ref('password')).when('password', {
+        is: Joi.exist(),
+        then: Joi.required(),
+      }),
     },
   }),
   profileController.update,
